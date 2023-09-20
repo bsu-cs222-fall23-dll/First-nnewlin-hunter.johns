@@ -1,4 +1,5 @@
 package edu.bsu.cs222;
+
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -9,15 +10,14 @@ public class WikiConnection {
 
     public static void main(String[] args) throws IOException {
         URLConnection connection = connectToWikipedia();
-        System.out.print(connection.getInputStream().readAllBytes().hashCode());
-        //String jsonData = readJsonAsStringFrom(connection);
-        //printRawJson(jsonData);
+        String jsonData = readJsonAsStringFrom(connection);
+        printRawJson(jsonData);
     }
 
     private static URLConnection connectToWikipedia() throws IOException {
         String encodedUrlString = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=" +
                 URLEncoder.encode("Zappa", Charset.defaultCharset()) +
-                "&rvprop=timestamp|user&rvlimit=6&redirects";
+                "&rvprop=timestamp|user&rvlimit=4&redirects";
         URL url = new URL(encodedUrlString);
         URLConnection connection = url.openConnection();
         connection.setRequestProperty("User-Agent",
