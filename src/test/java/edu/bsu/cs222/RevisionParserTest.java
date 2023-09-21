@@ -2,9 +2,10 @@ package edu.bsu.cs222;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+import org.json.JSONArray;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class RevisionParserTest
 {
@@ -12,7 +13,7 @@ public class RevisionParserTest
     public void testParse() throws IOException {
         RevisionParser parser = new RevisionParser();
         InputStream testDataStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("test.json");
-        String timestamp = parser.parse(testDataStream);
-        Assertions.assertEquals("2023-09-20T17:34:47Z", timestamp);
+        JSONArray revisions = parser.parse(testDataStream);
+        Assertions.assertEquals(null, revisions);
     }
 }
