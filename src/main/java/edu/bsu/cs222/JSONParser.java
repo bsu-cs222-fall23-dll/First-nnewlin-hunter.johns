@@ -19,17 +19,20 @@ public class JSONParser
         }
         else return "";
     }
-    public ArrayList<Revision> constructRevisionList()
-    {
+    public ArrayList<Revision> constructRevisionList() {
         JSONArray array = JsonPath.read(this.JSONData, "$..revisions[*]");
         ArrayList<Revision> revisionList = new ArrayList<>();
         ArrayList<String> timestamps = constructTimestampList();
         ArrayList<String> usernames = constructUsernameList();
-        for(int x = 0; x < array.size(); x++)
-        {
-            revisionList.add(new Revision(timestamps.get(x),usernames.get(x)));
+        if (doesPageExist()) {
+            for (int x = 0; x < array.size(); x++) {
+                revisionList.add(new Revision(timestamps.get(x), usernames.get(x)));
+            }
+            return revisionList;
         }
-        return revisionList;
+        else{
+            return null;
+        }
     }
     private ArrayList<String> constructTimestampList()
     {
@@ -43,7 +46,7 @@ public class JSONParser
     {
         return !(JsonPath.read(this.JSONData,"$..redirects[*].to").toString().equals("[]"));
     }
-    public boolean doesPageExist() throws Exception
+    public boolean doesPageExist()
     {
         try
         {
@@ -58,6 +61,7 @@ public class JSONParser
             {
                 return true;
             }
+
         }
         catch(Exception e)
         {
