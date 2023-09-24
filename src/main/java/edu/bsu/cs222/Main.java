@@ -1,14 +1,25 @@
 package edu.bsu.cs222;
 
+import java.util.Scanner;
+
 public class Main {
-    public String input(String input) {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the page you wish to view");
+
+        String input = scanner.nextLine();
+        Object validationResult = inputValidator(input);
+
+    }
+    public static String input(String input) {
         return input;
     }
 
 
-    public Object inputValidator(String input) {
+    public static Object inputValidator(String input) {
         if (input.isEmpty()){
-            System.err.print("Invalid input");
+            System.err.print("Page does not exist");
             return null;
         }
         else{
