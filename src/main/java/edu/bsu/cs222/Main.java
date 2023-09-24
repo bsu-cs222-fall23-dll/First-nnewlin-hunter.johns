@@ -10,12 +10,8 @@ public class Main {
 
         String input = scanner.nextLine();
         Object validationResult = inputValidator(input);
-        /*if (validationResult!= null){
-            String validInput = validationResult.toString();
-            WikiConnection.connectToWikipedia(validInput);
-        }
-         */
     }
+
     public static String input(String input) {
         return input;
     }
@@ -28,6 +24,16 @@ public class Main {
         }
         else{
             return input(input);
+        }
+    }
+
+    public static Object pass(Object passedValue) {
+        if (passedValue != null){
+            String validInput = passedValue.toString();
+            return validInput;
+        }
+        else{
+            return null;
         }
     }
 }

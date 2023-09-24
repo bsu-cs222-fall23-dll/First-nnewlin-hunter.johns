@@ -19,4 +19,10 @@ public class MainTest {
         Main main = new Main();
         Assertions.assertNull(main.inputValidator(""));
     }
+
+    @Test
+    public void testPass(){
+        Main main = new Main();
+        Assertions.assertNull(Main.pass(Main.inputValidator("")));
+    }
 }
