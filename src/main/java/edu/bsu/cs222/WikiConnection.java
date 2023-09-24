@@ -16,7 +16,7 @@ public class WikiConnection
         return wikiConnection.getJSONStringFromConnection(urlConnection);
     }
 
-    private URL getConstructedURLFromArticleName(String articleName) throws MalformedURLException
+    URL getConstructedURLFromArticleName(String articleName) throws MalformedURLException
     {
         return new URL("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=" +
                     URLEncoder.encode(articleName, Charset.defaultCharset()) +
