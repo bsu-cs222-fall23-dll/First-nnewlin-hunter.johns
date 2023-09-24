@@ -30,10 +30,11 @@ public class Main {
     public static Object pass(Object passedValue) {
         if (passedValue != null){
             String validInput = passedValue.toString();
+            //WikiConnection.connectToWikipedia(validInput);
             return validInput;
         }
         else{
-            return null;
+            return inputValidator("");
         }
     }
 }
