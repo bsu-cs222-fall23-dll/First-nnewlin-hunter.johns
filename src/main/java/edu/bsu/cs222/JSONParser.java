@@ -17,10 +17,22 @@ public class JSONParser
     {
         if(isRedirected())
         {
+            /*String redirect = "Redirected to " + JsonPath.read(this.JSONData,"$..redirects[*].to") + "\n";
+            return formatRedirects(redirect);
+             */
             return "Redirected to: " + JsonPath.read(this.JSONData,"$..redirects[*].to") + "\n";
         }
         else return "";
     }
+
+   /* public String formatRedirects(String redirect)
+    {
+        redirect = redirect.replace("[","");
+        redirect = redirect.replace("\"","");
+        redirect = redirect.replace("[","");
+        return redirect;
+    }
+    */
     public ArrayList<Revision> constructRevisionList() {
         JSONArray array = JsonPath.read(this.JSONData, "$..revisions[*]");
         ArrayList<Revision> revisionList = new ArrayList<>();

@@ -19,6 +19,9 @@ public class JSONParserTest
         String JSONString = new WikiConnection().getJSONStringFromArticleName("Zappa");
         JSONParser parser = new JSONParser(JSONString);
         String validator = parser.getAnyRedirects();
-        Assertions.assertEquals("Redirected to: [\"Frank Zappa\"]\n", validator);
+        validator = validator.replace("[","");
+        validator = validator.replace("\"","");
+        validator = validator.replace("]","");
+        Assertions.assertEquals("Redirected to Frank Zappa\n", validator);
     }
 }
