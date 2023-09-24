@@ -55,6 +55,7 @@ public class JSONParser
             if(pageID == 0)
             {
                 System.err.println("Invalid Page");
+                System.exit(0);
                 return false;
             }
             else
@@ -66,6 +67,7 @@ public class JSONParser
         catch(Exception e)
         {
             System.err.println("Not a Page Name");
+            System.exit(0);
             return false;
         }
     }
