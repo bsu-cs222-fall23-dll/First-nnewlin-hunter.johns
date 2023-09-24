@@ -3,7 +3,6 @@ package edu.bsu.cs222;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.InputStream;
 
 public class MainTest {
     @Test
@@ -20,9 +19,4 @@ public class MainTest {
         Assertions.assertNull(main.inputValidator(""));
     }
 
-    @Test
-    public void testPass(){
-        Main main = new Main();
-        Assertions.assertNull(Main.pass(Main.inputValidator("")));
-    }
 }

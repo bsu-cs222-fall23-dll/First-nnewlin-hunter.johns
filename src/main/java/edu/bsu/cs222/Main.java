@@ -10,6 +10,7 @@ public class Main {
 
         String input = scanner.nextLine();
         Object validationResult = inputValidator(input);
+        pass(validationResult);
     }
 
     public static String input(String input) {
@@ -27,14 +28,10 @@ public class Main {
         }
     }
 
-    public static Object pass(Object passedValue) {
+    public static void pass(Object passedValue) {
         if (passedValue != null){
             String validInput = passedValue.toString();
             //WikiConnection.connectToWikipedia(validInput);
-            return validInput;
-        }
-        else{
-            return inputValidator("");
         }
     }
 }
