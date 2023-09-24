@@ -11,6 +11,8 @@ public class JSONParser
     {
         this.JSONData = JSONData;
     }
+
+
     public String getAnyRedirects()
     {
         if(isRedirected())
@@ -42,7 +44,7 @@ public class JSONParser
     {
         return JsonPath.read(this.JSONData,"$..revisions[*].user");
     }
-    private boolean isRedirected()
+    boolean isRedirected()
     {
         return !(JsonPath.read(this.JSONData,"$..redirects[*].to").toString().equals("[]"));
     }
