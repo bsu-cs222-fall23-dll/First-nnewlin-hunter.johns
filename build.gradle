@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'net.minidev:minidev-parent:2.4.4'
+    implementation 'net.minidev:json-smart:2.5.0'
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation group: 'com.jayway.jsonpath', name: 'json-path', version: '2.8.0'

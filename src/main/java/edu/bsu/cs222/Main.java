@@ -1,37 +1,33 @@
 package edu.bsu.cs222;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+    public static void main(String[] args) throws Exception {
+        String articleName;
+        String JSONString;
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the page you wish to view");
+        System.out.println("Enter article name:");
+        articleName = new Scanner(System.in).nextLine();
+        JSONString = new WikiConnection().getJSONStringFromArticleName(articleName);
+        JSONParser parser = new JSONParser(JSONString);
+        System.out.print(JSONString);
+        System.out.println();
+        System.out.print(parser.getAnyRedirects());
+        System.out.println();
+        System.out.print(parser.doesPageExist());
 
-        String input = scanner.nextLine();
-        Object validationResult = inputValidator(input);
-        pass(validationResult);
+        ArrayList<Revision> revisions = parser.constructRevisionList();
+
     }
-
-    public static String input(String input) {
-        return input;
-    }
-
-
-    public static Object inputValidator(String input) {
-        if (input.isEmpty()){
-            System.err.print("Page does not exist");
-            return null;
-        }
-        else{
-            return input(input);
-        }
-    }
-
-    public static void pass(Object passedValue) {
-        if (passedValue != null){
-            String validInput = passedValue.toString();
-            //WikiConnection.connectToWikipedia(validInput);
+    public void displayRevisionsFromList(ArrayList<Revision> revisionList)
+    {
+        for(int x = 0; x < revisionList.size(); x++)
+        {
+            System.out.print("Showing the last " + revisionList.size() + " edits:\n");
+            System.out.print(revisionList.get(x).getTimestamp() + " " + revisionList.get(x).getUsername() + "\n");
         }
     }
 }
