@@ -13,12 +13,12 @@ public class Main {
         articleName = new Scanner(System.in).nextLine();
         JSONString = new WikiConnection().getJSONStringFromArticleName(articleName);
         JSONParser parser = new JSONParser(JSONString);
-        System.out.print(parser.getAnyRedirects());
-        ArrayList<Revision> revisions = parser.constructRevisionList();
+        System.out.print(parser.getRedirectsAsString());
+        ArrayList<Revision> revisions = parser.constructRevisionArrayList();
 
-        displayRevisionsFromList(revisions);
+        displayRevisionsFromArrayList(revisions);
     }
-    public static void displayRevisionsFromList(ArrayList<Revision> revisionList)
+    public static void displayRevisionsFromArrayList(ArrayList<Revision> revisionList)
     {
         System.out.print("Showing the last " + revisionList.size() + " edits:\n");
         for (Revision revision : revisionList) {

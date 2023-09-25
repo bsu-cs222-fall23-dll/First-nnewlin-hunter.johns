@@ -25,7 +25,7 @@ public class JSONParserTest {
         String jsonData = readSampleFileAsString("test.json");
 
         JSONParser parser = new JSONParser(jsonData);
-        ArrayList<Revision> revisions = parser.constructRevisionList();
+        ArrayList<Revision> revisions = parser.constructRevisionArrayList();
         Assertions.assertNotNull(revisions);
     }
     @Test
@@ -34,7 +34,7 @@ public class JSONParserTest {
         String jsonData = readSampleFileAsString("test.json");
 
         JSONParser parser = new JSONParser(jsonData);
-        ArrayList<Revision> revisions = parser.constructRevisionList();
+        ArrayList<Revision> revisions = parser.constructRevisionArrayList();
         Assertions.assertEquals(4, revisions.size());
     }
     @Test
@@ -57,7 +57,7 @@ public class JSONParserTest {
         String jsonData = readSampleFileAsString("test.json");
 
         JSONParser testParser = new JSONParser(jsonData);
-        Assertions.assertEquals("",testParser.getAnyRedirects());
+        Assertions.assertEquals("",testParser.getRedirectsAsString());
     }
     @Test
     public void testStringOutputWhenTrueRedirect() throws IOException
@@ -65,7 +65,7 @@ public class JSONParserTest {
         String jsonData = readSampleFileAsString("redirect.json");
 
         JSONParser redirectParser = new JSONParser(jsonData);
-        Assertions.assertEquals("Redirected to Joe Biden\n",redirectParser.getAnyRedirects());
+        Assertions.assertEquals("Redirected to Joe Biden\n",redirectParser.getRedirectsAsString());
     }
     @Test
     public void testRedirectFormat() throws IOException
@@ -91,7 +91,7 @@ public class JSONParserTest {
         arrayList.add("2023-01-31T14:41:34Z");
         arrayList.add("2023-01-09T11:22:35Z");
         arrayList.add("2022-12-30T16:50:48Z");
-        Assertions.assertEquals(arrayList,parser.constructTimestampList());
+        Assertions.assertEquals(arrayList,parser.constructTimestampArrayList());
     }
     @Test
     public void testConstructUsernameList() throws IOException
@@ -103,7 +103,7 @@ public class JSONParserTest {
         arrayList.add("Kazamzam");
         arrayList.add("WikiCleanerBot");
         arrayList.add("Osseinavia");
-        Assertions.assertEquals(arrayList,parser.constructUsernameList());
+        Assertions.assertEquals(arrayList,parser.constructUsernameArrayList());
     }
     private String readSampleFileAsString(String filename) throws NullPointerException, IOException
     {

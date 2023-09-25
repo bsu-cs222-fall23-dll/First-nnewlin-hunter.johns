@@ -6,18 +6,18 @@ import java.util.ArrayList;
 
 public class JSONParser
 {
-    String JSONData;
-    public JSONParser(String JSONData)
+    String JSONString;
+    public JSONParser(String JSONString)
     {
-        this.JSONData = JSONData;
+        this.JSONString = JSONString;
     }
 
-    public String getAnyRedirects()
+    public String getRedirectsAsString()
     {
         if(isRedirected())
         {
-            String redirect = "Redirected to " + JsonPath.read(this.JSONData,"$..redirects[*].to") + "\n";
-            return formatRedirects(redirect);
+            String unformattedRedirectString = "Redirected to " + JsonPath.read(this.JSONString,"$..redirects[*].to") + "\n";
+            return formatRedirects(unformattedRedirectString);
         }
         else return "";
     }
@@ -30,38 +30,38 @@ public class JSONParser
         return redirect;
     }
 
-    public ArrayList<Revision> constructRevisionList() {
-        JSONArray array = JsonPath.read(this.JSONData, "$..revisions[*]");
-        ArrayList<Revision> revisionList = new ArrayList<>();
-        ArrayList<String> timestamps = constructTimestampList();
-        ArrayList<String> usernames = constructUsernameList();
+    public ArrayList<Revision> constructRevisionArrayList() {
+        JSONArray JSONRevisions = JsonPath.read(this.JSONString, "$..revisions[*]");
+        ArrayList<Revision> revisionArrayList = new ArrayList<>();
+        ArrayList<String> timestamps = constructTimestampArrayList();
+        ArrayList<String> usernames = constructUsernameArrayList();
         if(doesPageExist())
         {
-            for (int x = 0; x < array.size(); x++)
+            for (int arrayIndex = 0; arrayIndex < JSONRevisions.size(); arrayIndex++)
             {
-                revisionList.add(new Revision(timestamps.get(x), usernames.get(x)));
+                revisionArrayList.add(new Revision(timestamps.get(arrayIndex), usernames.get(arrayIndex)));
             }
         }
-        return revisionList;
+        return revisionArrayList;
     }
-    public ArrayList<String> constructTimestampList()
+    public ArrayList<String> constructTimestampArrayList()
     {
-        return JsonPath.read(this.JSONData,"$..revisions[*].timestamp");
+        return JsonPath.read(this.JSONString,"$..revisions[*].timestamp");
     }
-    public ArrayList<String> constructUsernameList()
+    public ArrayList<String> constructUsernameArrayList()
     {
-        return JsonPath.read(this.JSONData,"$..revisions[*].user");
+        return JsonPath.read(this.JSONString,"$..revisions[*].user");
     }
     public boolean isRedirected()
     {
-        return !(JsonPath.read(this.JSONData,"$..redirects[*].to").toString().equals("[]"));
+        return !(JsonPath.read(this.JSONString,"$..redirects[*].to").toString().equals("[]"));
     }
     public boolean doesPageExist()
     {
         try
         {
-            JSONArray array= JsonPath.read(this.JSONData,"$.query.pages.*.[*]");
-            int pageID = Integer.parseInt(array.get(0).toString());
+            JSONArray JSONPages= JsonPath.read(this.JSONString,"$.query.pages.*.[*]");
+            int pageID = Integer.parseInt(JSONPages.get(0).toString());
             if(pageID == 0)
             {
                 System.err.println("No Page Found");
