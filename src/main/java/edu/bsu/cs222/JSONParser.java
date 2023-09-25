@@ -12,51 +12,47 @@ public class JSONParser
         this.JSONData = JSONData;
     }
 
-
     public String getAnyRedirects()
     {
         if(isRedirected())
         {
-            /*String redirect = "Redirected to " + JsonPath.read(this.JSONData,"$..redirects[*].to") + "\n";
+            String redirect = "Redirected to " + JsonPath.read(this.JSONData,"$..redirects[*].to") + "\n";
             return formatRedirects(redirect);
-             */
-            return "Redirected to: " + JsonPath.read(this.JSONData,"$..redirects[*].to") + "\n";
         }
         else return "";
     }
 
-   /* public String formatRedirects(String redirect)
+    public String formatRedirects(String redirect)
     {
         redirect = redirect.replace("[","");
         redirect = redirect.replace("\"","");
-        redirect = redirect.replace("[","");
+        redirect = redirect.replace("]","");
         return redirect;
     }
-    */
+
     public ArrayList<Revision> constructRevisionList() {
         JSONArray array = JsonPath.read(this.JSONData, "$..revisions[*]");
         ArrayList<Revision> revisionList = new ArrayList<>();
         ArrayList<String> timestamps = constructTimestampList();
         ArrayList<String> usernames = constructUsernameList();
-        if (doesPageExist()) {
-            for (int x = 0; x < array.size(); x++) {
+        if(doesPageExist())
+        {
+            for (int x = 0; x < array.size(); x++)
+            {
                 revisionList.add(new Revision(timestamps.get(x), usernames.get(x)));
             }
-            return revisionList;
         }
-        else{
-            return null;
-        }
+        return revisionList;
     }
-    private ArrayList<String> constructTimestampList()
+    public ArrayList<String> constructTimestampList()
     {
         return JsonPath.read(this.JSONData,"$..revisions[*].timestamp");
     }
-    private ArrayList<String> constructUsernameList()
+    public ArrayList<String> constructUsernameList()
     {
         return JsonPath.read(this.JSONData,"$..revisions[*].user");
     }
-    boolean isRedirected()
+    public boolean isRedirected()
     {
         return !(JsonPath.read(this.JSONData,"$..redirects[*].to").toString().equals("[]"));
     }
@@ -68,7 +64,7 @@ public class JSONParser
             int pageID = Integer.parseInt(array.get(0).toString());
             if(pageID == 0)
             {
-                System.err.println("Invalid Page");
+                System.err.println("No Page Found");
                 System.exit(0);
                 return false;
             }
@@ -80,7 +76,7 @@ public class JSONParser
         }
         catch(Exception e)
         {
-            System.err.println("Not a Page Name");
+            System.err.println("Invalid Input");
             System.exit(0);
             return false;
         }

@@ -1,10 +1,11 @@
 package edu.bsu.cs222;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         String articleName;
         String JSONString;
 
@@ -13,10 +14,9 @@ public class Main {
         JSONString = new WikiConnection().getJSONStringFromArticleName(articleName);
         JSONParser parser = new JSONParser(JSONString);
         System.out.print(parser.getAnyRedirects());
-        System.out.println();
         ArrayList<Revision> revisions = parser.constructRevisionList();
-        Main.displayRevisionsFromList(revisions);
 
+        displayRevisionsFromList(revisions);
     }
     public static void displayRevisionsFromList(ArrayList<Revision> revisionList)
     {

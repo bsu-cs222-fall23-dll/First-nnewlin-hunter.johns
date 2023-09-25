@@ -11,7 +11,8 @@ https://www.youtube.com/watch?v=Ek06EI2yQOQ&ab_channel=PaulGestwicki
 ## Summary
 This Java project demonstrates the ability to connect to Wikipedia's servers to fetch the most recent
 editors of an article. The program prompts for an article title, and will display up to the last 13 edits in reverse
-chronological order. If there is a redirect, the program will display where it redirected to.
+chronological order. If there is a redirect, the program will display where it redirected to. If there is a network
+error, the user gives invalid input, or no article data could be found, the program returns an error message.
 
 ## Functional Requirements
 As an investigative journalist, I want to see who most recently changed a Wikipedia article.
