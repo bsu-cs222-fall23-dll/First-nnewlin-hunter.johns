@@ -14,6 +14,10 @@ editors of an article. The program prompts for an article title, and will displa
 chronological order. If there is a redirect, the program will display where it redirected to. If there is a network
 error, the user gives invalid input, or no article data could be found, the program returns an error message.
 
+## Build Requirements
+We used several external libraries as shown in the build.gradle file. Java 11 and
+up is required to run this project.
+
 ## Functional Requirements
 As an investigative journalist, I want to see who most recently changed a Wikipedia article.
 1.  I can provide the name of a Wikipedia article on the command-line when I run the application.
