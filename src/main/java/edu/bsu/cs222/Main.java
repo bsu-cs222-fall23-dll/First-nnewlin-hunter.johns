@@ -18,6 +18,7 @@ public class Main {
 
         displayRevisionsFromArrayList(revisions);
     }
+
     public static void displayRevisionsFromArrayList(ArrayList<Revision> revisionList)
     {
         System.out.print("Showing the last " + revisionList.size() + " edits:\n");

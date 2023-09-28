@@ -1,8 +1,10 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
-group = 'org.example'
+group = 'edu.bsu.cs222'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -17,8 +19,18 @@ dependencies {
     implementation group: 'com.jayway.jsonpath', name: 'json-path', version: '2.8.0'
     implementation 'org.json:json:20230227'
     implementation group: 'org.slf4j', name: 'slf4j-nop', version: '2.0.9'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.9.0')
+    implementation group: 'net.minidev', name: 'json-smart', version: '2.5.0'
+    implementation group: 'org.slf4j', name: 'slf4j-nop', version: '2.0.9'
 }
 
 test {
     useJUnitPlatform()
 }
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    version = '13.0.2'
+}
+
+// mainClassName = 'edu.bsu.cs222.Main'
