@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 public class GUI extends Application{
 
     Button search;
+    Button brokenButton;
     Scene input, output;
     public static void main(String[] args) {
         launch();
@@ -29,8 +30,12 @@ public class GUI extends Application{
         search.setText("Search");
         search.setOnAction(e -> primaryStage.setScene(output));
 
+        brokenButton = new Button();
+        brokenButton.setText("This is an empty result");
+        brokenButton.setOnAction(e -> AlertBox.output("Oops", "Invalid entry."));
+
         VBox layoutInput = new VBox(50);
-        layoutInput.getChildren().addAll(instructionText, search);
+        layoutInput.getChildren().addAll(instructionText, search, brokenButton);
 
         StackPane layoutOutput = new StackPane();
         layoutOutput.getChildren().add(outputText);
