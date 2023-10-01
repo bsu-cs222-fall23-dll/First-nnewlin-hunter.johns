@@ -2,11 +2,8 @@
 CS222 First project
 
 ## Authors
-Nicholas Newlin
+Nicholas Newlin 
 Hunter Johns
-
-Sections of code were repurposed from Paul Gestwicki's example found here:
-https://www.youtube.com/watch?v=Ek06EI2yQOQ&ab_channel=PaulGestwicki
 
 ## Summary
 This Java project demonstrates the ability to connect to Wikipedia's servers to fetch the most recent
@@ -35,3 +32,10 @@ As an investigative journalist, I want to see who most recently changed a Wikipe
     System.err and exit the program.
 6.  If there is a network error, print an appropriate error message to System.err  and exit the
     program.
+
+## Sources used
+Sections of code were repurposed from Paul Gestwicki's example found here:
+https://www.youtube.com/watch?v=Ek06EI2yQOQ&ab_channel=PaulGestwicki
+
+Sections of code were repurposed from thenewboston's example code found here:
+https://www.youtube.com/watch?v=7LxWQIDOzyE&list=PL6gx4Cwl9DGBzfXLWLSYVy8EbTdpGbUIG&index=4
