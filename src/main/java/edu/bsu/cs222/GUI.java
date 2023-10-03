@@ -7,9 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class GUI extends Application{
@@ -17,6 +20,8 @@ public class GUI extends Application{
     Button search;
     Button brokenButton;
     Scene input, output;
+    Label redirectText;
+    VBox layoutOutput = new VBox();
     public static void main(String[] args) {
         launch();
     }
@@ -26,15 +31,17 @@ public class GUI extends Application{
         primaryStage.setTitle("Wikipedia Revision Checker");
 
         Label instructionText = new Label("Please insert the name of a Wikipedia article you wish to check the revision history of.");
-        Label outputText = new Label("This is where the output will go.");
-
+        //redirectText = new Label("");
         TextField articleInput = new TextField();
 
         search = new Button();
         search.setText("Search");
         search.setOnAction(e -> {
-            primaryStage.setScene(output);
-            String input =articleInput.getText();
+            try {
+                output(primaryStage, articleInput);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         brokenButton = new Button();
@@ -45,14 +52,41 @@ public class GUI extends Application{
         layoutInput.getChildren().addAll(instructionText, articleInput, search, brokenButton);
         layoutInput.setAlignment(Pos.CENTER_LEFT);
 
-        StackPane layoutOutput = new StackPane();
-        layoutOutput.getChildren().add(outputText);
 
         input = new Scene(layoutInput, 500, 400);
-        output = new Scene(layoutOutput, 400, 400);
 
         primaryStage.setScene(input);
         primaryStage.show();
     }
 
+    public void wikiSearch(TextField articleInput) throws IOException {
+        String input =articleInput.getText();
+        String JSONString = new WikiConnection().getJSONStringFromArticleName(input);
+        JSONParser parser = new JSONParser(JSONString);
+        ArrayList<Revision> revisions = parser.constructRevisionArrayList();
+
+        Label outputText = new Label("Showing the last " + revisions.size() + " edits:\n");
+        layoutOutput.getChildren().add(outputText);
+
+        for (Revision revision : revisions) {
+            Label revisionsText = new Label(revision.getTimestamp() + " " + revision.getUsername() + "\n");
+            layoutOutput.getChildren().add(revisionsText);
+        }
+    }
+
+    public void redirectOutput(TextField articleInput) throws IOException{
+        String input =articleInput.getText();
+        String JSONString = new WikiConnection().getJSONStringFromArticleName(input);
+        JSONParser parser = new JSONParser(JSONString);
+        redirectText = new Label(parser.getRedirectsAsString());
+        layoutOutput.getChildren().add(redirectText);
+    }
+
+    public void output(Stage primaryStage, TextField articleInput) throws IOException{
+        redirectOutput(articleInput);
+        wikiSearch(articleInput);
+        layoutOutput.setAlignment(Pos.CENTER);
+        output = new Scene(layoutOutput, 400, 400);
+        primaryStage.setScene(output);
+    }
 }

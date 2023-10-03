@@ -20,11 +20,11 @@ public class AlertBox {
         closeButton.setOnAction(e -> window.close());
 
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(label, layout);
+        layout.getChildren().addAll(label, layout, closeButton);
         layout.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(layout);
-        window.setScene(scene);
+        Scene errorPopup = new Scene(layout);
+        window.setScene(errorPopup);
         window.showAndWait();
     }
 }
