@@ -14,6 +14,7 @@ error, the user gives invalid input, or no article data could be found, the prog
 ## Build Requirements
 We used several external libraries as shown in the build.gradle file. Java 11 and
 up is required to run this project.
+In order to run the console version of the code, run the main method in the main class. In order to use the GUI iteration, use the gradle function "run".
 
 ## Functional Requirements
 As an investigative journalist, I want to see who most recently changed a Wikipedia article.

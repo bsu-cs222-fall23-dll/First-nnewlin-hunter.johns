@@ -31,7 +31,6 @@ public class GUI extends Application{
         primaryStage.setTitle("Wikipedia Revision Checker");
 
         Label instructionText = new Label("Please insert the name of a Wikipedia article you wish to check the revision history of.");
-        //redirectText = new Label("");
         TextField articleInput = new TextField();
 
         search = new Button();
