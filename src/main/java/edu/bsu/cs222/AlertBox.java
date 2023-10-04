@@ -20,7 +20,7 @@ public class AlertBox {
         closeButton.setOnAction(e -> window.close());
 
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(label, layout, closeButton);
+        layout.getChildren().addAll(label, closeButton);
         layout.setAlignment(Pos.CENTER);
 
         Scene errorPopup = new Scene(layout);
